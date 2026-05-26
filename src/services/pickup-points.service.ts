@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 import { ENV } from "@/constants/env";
-import { graphqlClient } from "@/services/graphql-client";
-import type { PickupPoint } from "@/types/pickup-point";
+import { graphqlClient } from "@/services/graphql-client.service";
+import type { PickupPoint } from "@/types/pickup-point.type";
 
 type PickupPointsResponse = {
   session: {
@@ -63,7 +63,7 @@ const PICKUP_POINTS_QUERY = gql`
   }
 `;
 
-export async function getPickupPoints() {
+export const getPickupPoints = async () => {
   const response = await graphqlClient.request<PickupPointsResponse>(
     PICKUP_POINTS_QUERY,
     {
@@ -73,4 +73,4 @@ export async function getPickupPoints() {
   );
 
   return response.session.pickupPoint.pickupPoints.points.data;
-}
+};
