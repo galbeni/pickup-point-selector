@@ -1,3 +1,5 @@
+import { MapLoadingState } from "@/components/map/map-loading-state";
+
 export const PickupPointSelectorSkeleton = () => {
   return (
     <div className="mt-6 space-y-6">
@@ -9,7 +11,7 @@ export const PickupPointSelectorSkeleton = () => {
         </div>
       </div>
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-        <div className="h-160 animate-pulse rounded-2xl border border-slate-200 bg-slate-200 shadow-sm" />
+        <MapLoadingState />
         <aside className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="h-5 w-40 animate-pulse rounded bg-slate-200" />
           <div className="mt-3 h-4 w-full animate-pulse rounded bg-slate-200" />
