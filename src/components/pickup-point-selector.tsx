@@ -1,11 +1,28 @@
 "use client";
+import dynamic from "next/dynamic";
 import { usePickupPoints } from "@/hooks/use-pickup-points.hook";
+import { PickupPointInfoPanel } from "@/components/pickup-point/pickup-point-info-panel";
+
+const PickupPointMap = dynamic(
+  () =>
+    import("@/components/map/pickup-point-map").then(
+      (module) => module.PickupPointMap,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-160 animate-pulse rounded-2xl bg-slate-200" />
+    ),
+  },
+);
 
 export const PickupPointSelector = () => {
   const { data, isLoading, isError, refetch } = usePickupPoints();
 
   if (isLoading) {
-    return <p className="mt-6 text-slate-600">Loading pickup points...</p>;
+    return (
+      <div className="mt-6 h-160 animate-pulse rounded-2xl bg-slate-200" />
+    );
   }
 
   if (isError) {
@@ -26,8 +43,9 @@ export const PickupPointSelector = () => {
   }
 
   return (
-    <p className="mt-6 text-slate-600">
-      Loaded pickup points: {data?.length ?? 0}
-    </p>
+    <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_380px]">
+      <PickupPointMap pickupPoints={data ?? []} />
+      <PickupPointInfoPanel />
+    </div>
   );
 };
