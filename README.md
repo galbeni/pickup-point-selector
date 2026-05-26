@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pickup Point Selector
+
+Interactive pickup point selector built with Next.js, React, TypeScript and Leaflet using the Delivery Gateway public GraphQL API.
+
+## Features
+
+- Interactive map with marker clustering
+- Pickup point search by city or address
+- Detailed pickup point info panel
+- Pickup point selection state handling
+- Loading and error states
+- Internationalization (EN/HU)
+- Docker support
+
+## Tech Stack
+
+- Next.js App Router
+- React + TypeScript
+- TanStack Query
+- Zustand
+- Leaflet + React Leaflet
+- next-intl
+- Docker
 
 ## Getting Started
 
-First, run the development server:
+### Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+cp .env.example .env.local
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```txt
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Production build
 
-## Learn More
+```bash
+pnpm build
+pnpm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker compose --env-file .env.local up --build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+```env
+NEXT_PUBLIC_GRAPHQL_ENDPOINT=
+NEXT_PUBLIC_MERCHANT_ID=
+NEXT_PUBLIC_SESSION_ID=
+NEXT_PUBLIC_DEFAULT_PAGE_SIZE=
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Marker clustering is used to handle large datasets efficiently.
+- Initial dataset size is intentionally limited for performance reasons.
+- The interactive map and pickup point fetching are client-side rendered because Leaflet depends on browser APIs.
+- A separate side info panel was introduced for better UX and readability instead of displaying detailed opening hours inside map popups.
+
+## Future Improvements
+
+- Debounced geocoding search
+- Viewport-based pickup point loading
+- URL-persisted selected pickup point
+- Lazy loading markers by zoom level
