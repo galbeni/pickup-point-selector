@@ -89,7 +89,8 @@ export const PickupPointInfoPanel = () => {
       <button
         type="button"
         onClick={() => setSelectedPickupPoint(activePickupPoint)}
-        className="mt-6 w-full rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+        className="mt-6 w-full rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-lime-600"
+        disabled={isSelected}
       >
         {isSelected ? "Selected" : "Select pickup point"}
       </button>
