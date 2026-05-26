@@ -1,0 +1,54 @@
+{
+  "app": {
+    "title": "Pickup Point Selector",
+    "description": "Search and select a pickup point on the map."
+  },
+  "common": {
+    "search": "Search",
+    "searching": "Searching...",
+    "selected": "Selected",
+    "selectPickupPoint": "Select pickup point",
+    "loadingMap": "Loading map..."
+  },
+  "search": {
+    "label": "Search by city or address",
+    "placeholder": "e.g. Budapest, Bucharest, Berlin..",
+    "hint": "Type at least 3 characters to search.",
+    "result": "Search result",
+    "validation": "Please enter at least 3 characters.",
+    "notFound": "Location not found.",
+    "failed": "Unable to search location. Please try again.",
+    "clear": "Clear search"
+  },
+  "pickupPoint": {
+    "id": "ID",
+    "details": "Pickup point details",
+    "empty": "Click a marker on the map to see details.",
+    "openingHours": "Opening hours",
+    "status": "Status",
+    "available": "Available",
+    "open": "Open",
+    "closed": "Closed",
+    "yes": "Yes",
+    "no": "No",
+    "type": "Type",
+    "selectedSummary": "Selected pickup point"
+  },
+  "types": {
+    "LOCKER": "Locker",
+    "SHOP": "Shop"
+  },
+  "days": {
+    "MONDAY": "Monday",
+    "TUESDAY": "Tuesday",
+    "WEDNESDAY": "Wednesday",
+    "THURSDAY": "Thursday",
+    "FRIDAY": "Friday",
+    "SATURDAY": "Saturday",
+    "SUNDAY": "Sunday"
+  },
+  "errors": {
+    "pickupPoints": "Failed to load pickup points.",
+    "retry": "Retry"
+  }
+}

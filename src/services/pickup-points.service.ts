@@ -1,19 +1,7 @@
 import { gql } from "graphql-request";
 import { ENV } from "@/constants/env";
 import { graphqlClient } from "@/services/graphql-client.service";
-import type { PickupPoint } from "@/types/pickup-point.type";
-
-type PickupPointsResponse = {
-  session: {
-    pickupPoint: {
-      pickupPoints: {
-        points: {
-          data: PickupPoint[];
-        };
-      };
-    };
-  };
-};
+import type { PickupPointsResponse } from "@/types/pickup-point.type";
 
 const PICKUP_POINTS_QUERY = gql`
   query PickupPoints($id: ID!, $first: Int!) {
