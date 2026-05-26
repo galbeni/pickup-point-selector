@@ -1,0 +1,54 @@
+{
+  "app": {
+    "title": "Átvételi pont választó",
+    "description": "Keress és válassz átvételi pontot a térképen. "
+  },
+  "common": {
+    "search": "Keresés",
+    "searching": "Keresés...",
+    "selected": "Kiválasztva",
+    "selectPickupPoint": "Átvételi pont kiválasztása",
+    "loadingMap": "Térkép betöltése..."
+  },
+  "search": {
+    "label": "Keresés város vagy cím alapján",
+    "placeholder": "pl. Budapest, Bukarest, Berlin..",
+    "hint": "Legalább 3 karakter megadása szükséges.",
+    "result": "Keresési találat",
+    "validation": "Adj meg legalább 3 karaktert.",
+    "notFound": "Nem található lokáció.",
+    "failed": "A keresés sikertelen. Próbáld újra.",
+    "clear": "Keresés törlése"
+  },
+  "pickupPoint": {
+    "id": "Azonosító",
+    "details": "Átvételi pont adatai",
+    "empty": "Kattints egy markerre a részletek megtekintéséhez.",
+    "openingHours": "Nyitvatartás",
+    "status": "Állapot",
+    "available": "Elérhető",
+    "open": "Nyitva",
+    "closed": "Zárva",
+    "yes": "Igen",
+    "no": "Nem",
+    "type": "Típus",
+    "selectedSummary": "Kiválasztott átvételi pont"
+  },
+  "types": {
+    "LOCKER": "Csomagautomata",
+    "SHOP": "Átvételi pont"
+  },
+  "days": {
+    "MONDAY": "Hétfő",
+    "TUESDAY": "Kedd",
+    "WEDNESDAY": "Szerda",
+    "THURSDAY": "Csütörtök",
+    "FRIDAY": "Péntek",
+    "SATURDAY": "Szombat",
+    "SUNDAY": "Vasárnap"
+  },
+  "errors": {
+    "pickupPoints": "Nem sikerült betölteni az átvételi pontokat.",
+    "retry": "Újra"
+  }
+}

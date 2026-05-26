@@ -1,4 +1,6 @@
 import { ReactQueryProvider } from "@/providers/react-query.provider";
+import { NextIntlClientProvider } from "next-intl";
+import { locales } from "@/i18n/config";
 import type { Metadata } from "next";
 
 import "leaflet/dist/leaflet.css";
@@ -17,9 +19,11 @@ type RootLayoutProps = Readonly<{
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html lang="hu">
+    <html lang="en">
       <body>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <NextIntlClientProvider locale="en" messages={locales.en}>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
