@@ -1,9 +1,13 @@
 "use client";
 import { FormEvent, useState } from "react";
+import { useTranslations } from "next-intl";
 import { searchLocation } from "@/services/geocoding.service";
 import { usePickupPointStore } from "@/stores/pickup-point.store";
 
 export const LocationSearch = () => {
+  const tCommon = useTranslations("common");
+  const tSearch = useTranslations("search");
+
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -34,7 +38,7 @@ export const LocationSearch = () => {
       const result = results[0];
 
       if (!result) {
-        setErrorMessage("Location not found.");
+        setErrorMessage(tSearch("notFound"));
         return;
       }
 
@@ -44,7 +48,7 @@ export const LocationSearch = () => {
         label: result.display_name,
       });
     } catch {
-      setErrorMessage("Unable to search location. Please try again.");
+      setErrorMessage(tSearch("failed"));
     } finally {
       setIsSearching(false);
     }
@@ -65,7 +69,7 @@ export const LocationSearch = () => {
         htmlFor="location-search"
         className="text-sm font-semibold text-slate-900"
       >
-        Search by city or address
+        {tSearch("label")}
       </label>
       <div className="mt-3 flex gap-2">
         <div className="relative min-w-0 flex-1">
@@ -73,22 +77,20 @@ export const LocationSearch = () => {
             id="location-search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="e.g. Budapest, Bucharest, Berlin.."
+            placeholder={tSearch("placeholder")}
             className="w-full rounded-xl border h-10 border-slate-300 px-4 py-2 pr-10 text-sm outline-none transition focus:border-slate-950"
           />
-          <p className="mt-2 text-xs text-slate-500">
-            Type at least 3 characters to search.
-          </p>
+          <p className="mt-2 text-xs text-slate-500">{tSearch("hint")}</p>
           {isQueryTooShort ? (
             <p className="mt-1 text-xs text-amber-600">
-              Please enter at least 3 characters.
+              {tSearch("validation")}
             </p>
           ) : null}
           {query ? (
             <button
               type="button"
               onClick={handleClear}
-              aria-label="Clear search"
+              aria-label={tSearch("clear")}
               className="absolute right-3 top-2 rounded-full text-slate-400 transition hover:text-slate-700 cursor-pointer"
             >
               ×
@@ -100,7 +102,7 @@ export const LocationSearch = () => {
           disabled={isSearchDisabled}
           className="rounded-xl bg-slate-950 h-10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSearching ? "Searching..." : "Search"}
+          {isSearching ? tCommon("searching") : tCommon("search")}
         </button>
       </div>
       {errorMessage ? (

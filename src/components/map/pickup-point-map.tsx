@@ -1,14 +1,14 @@
 "use client";
 import L from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import { useTranslations } from "next-intl";
 import { useMemo, useEffect } from "react";
 import { useMap, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { usePickupPointStore } from "@/stores/pickup-point.store";
-import type { PickupPoint } from "@/types/pickup-point.type";
-
-type PickupPointMapProps = {
-  pickupPoints: PickupPoint[];
-};
+import type {
+  PickupPoint,
+  PickupPointMapProps,
+} from "@/types/pickup-point.type";
 
 const defaultCenter: [number, number] = [47.4979, 19.0402];
 
@@ -51,6 +51,7 @@ const MapTargetController = () => {
 };
 
 const SearchTargetMarker = () => {
+  const tSearch = useTranslations("search");
   const mapTarget = usePickupPointStore((state) => state.mapTarget);
 
   if (!mapTarget) {
@@ -60,7 +61,7 @@ const SearchTargetMarker = () => {
   return (
     <Marker position={[mapTarget.lat, mapTarget.lng]} icon={searchTargetIcon}>
       <Popup>
-        <p className="font-semibold">Search result</p>
+        <p className="font-semibold">{tSearch("result")}</p>
         <p>{mapTarget.label}</p>
       </Popup>
     </Marker>
@@ -84,6 +85,10 @@ const createMarkerIcon = (isActive: boolean) => {
 };
 
 export const PickupPointMap = ({ pickupPoints }: PickupPointMapProps) => {
+  const tCommon = useTranslations("common");
+  const tPickupPoint = useTranslations("pickupPoint");
+  const tTypes = useTranslations("types");
+
   const validPickupPoints = useMemo(
     () =>
       pickupPoints.filter(
@@ -148,14 +153,18 @@ export const PickupPointMap = ({ pickupPoints }: PickupPointMapProps) => {
                   <div className="space-y-2">
                     <p className="font-semibold">{point.name}</p>
                     <p>{formatAddress(point)}</p>
-                    <p>Type: {point.type}</p>
+                    <p>
+                      {tPickupPoint("type")}: {tTypes(point.type)}
+                    </p>
                     <button
                       type="button"
                       disabled={isSelected}
                       onClick={() => setSelectedPickupPoint(point)}
                       className="mt-2 w-full rounded-lg bg-slate-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 cursor-pointer disabled:cursor-not-allowed disabled:bg-lime-600"
                     >
-                      {isSelected ? "Selected" : "Select pickup point"}
+                      {isSelected
+                        ? tCommon("selected")
+                        : tCommon("selectPickupPoint")}
                     </button>
                   </div>
                 </Popup>
