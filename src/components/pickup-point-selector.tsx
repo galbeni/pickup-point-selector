@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { usePickupPoints } from "@/hooks/use-pickup-points.hook";
 import { PickupPointInfoPanel } from "@/components/pickup-point/pickup-point-info-panel";
+import { LocationSearch } from "@/components/search/location-search";
 
 const PickupPointMap = dynamic(
   () =>
@@ -43,9 +44,12 @@ export const PickupPointSelector = () => {
   }
 
   return (
-    <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_380px]">
-      <PickupPointMap pickupPoints={data ?? []} />
-      <PickupPointInfoPanel />
+    <div className="mt-6 space-y-6">
+      <LocationSearch />
+      <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+        <PickupPointMap pickupPoints={data ?? []} />
+        <PickupPointInfoPanel />
+      </div>
     </div>
   );
 };
