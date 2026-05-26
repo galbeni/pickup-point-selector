@@ -33,3 +33,33 @@ export type PickupPoint = {
     };
   }[];
 };
+
+export type PickupPointState = {
+  activePickupPoint: PickupPoint | null;
+  selectedPickupPoint: PickupPoint | null;
+  mapTarget: null | {
+    lat: number;
+    lng: number;
+    label: string;
+  };
+  setActivePickupPoint: (pickupPoint: PickupPoint | null) => void;
+  setSelectedPickupPoint: (pickupPoint: PickupPoint) => void;
+  setMapTarget: (target: PickupPointState["mapTarget"]) => void;
+  clearMapTarget: () => void;
+};
+
+export type PickupPointMapProps = {
+  pickupPoints: PickupPoint[];
+};
+
+export type PickupPointsResponse = {
+  session: {
+    pickupPoint: {
+      pickupPoints: {
+        points: {
+          data: PickupPoint[];
+        };
+      };
+    };
+  };
+};

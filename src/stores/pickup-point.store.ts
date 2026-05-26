@@ -1,19 +1,5 @@
 import { create } from "zustand";
-import type { PickupPoint } from "@/types/pickup-point.type";
-
-type PickupPointState = {
-  activePickupPoint: PickupPoint | null;
-  selectedPickupPoint: PickupPoint | null;
-  mapTarget: null | {
-    lat: number;
-    lng: number;
-    label: string;
-  };
-  setActivePickupPoint: (pickupPoint: PickupPoint | null) => void;
-  setSelectedPickupPoint: (pickupPoint: PickupPoint) => void;
-  setMapTarget: (target: PickupPointState["mapTarget"]) => void;
-  clearMapTarget: () => void;
-};
+import type { PickupPointState } from "@/types/pickup-point.type";
 
 export const usePickupPointStore = create<PickupPointState>((set) => ({
   activePickupPoint: null,
