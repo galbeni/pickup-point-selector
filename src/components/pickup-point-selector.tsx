@@ -4,6 +4,7 @@ import { usePickupPoints } from "@/hooks/use-pickup-points.hook";
 import { PickupPointInfoPanel } from "@/components/pickup-point/pickup-point-info-panel";
 import { LocationSearch } from "@/components/search/location-search";
 import { SelectedPickupPointSummary } from "@/components/pickup-point/selected-pickup-point-summary";
+import { PickupPointSelectorSkeleton } from "@/components/skeleton/pickup-point-selector-skeleton";
 
 const PickupPointMap = dynamic(
   () =>
@@ -22,9 +23,7 @@ export const PickupPointSelector = () => {
   const { data, isLoading, isError, refetch } = usePickupPoints();
 
   if (isLoading) {
-    return (
-      <div className="mt-6 h-160 animate-pulse rounded-2xl bg-slate-200" />
-    );
+    return <PickupPointSelectorSkeleton />;
   }
 
   if (isError) {
