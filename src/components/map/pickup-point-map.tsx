@@ -12,13 +12,16 @@ type PickupPointMapProps = {
 
 const defaultCenter: [number, number] = [47.4979, 19.0402];
 
-const markerIcon = new L.Icon({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
+const markerIcon = L.divIcon({
+  className: "custom-pickup-marker",
+  html: `
+    <div class="custom-pickup-marker__pin">
+      <img src="/bflogo.png" alt="" />
+    </div>
+  `,
+  iconSize: [44, 52],
+  iconAnchor: [22, 52],
+  popupAnchor: [0, -52],
 });
 
 const getMarkerPosition = (point: PickupPoint): [number, number] => {
