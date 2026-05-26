@@ -1,4 +1,8 @@
-export default function Home() {
+import { getPickupPoints } from "@/services/pickup-points";
+
+export default async function Home() {
+  const pickupPoints = await getPickupPoints();
+
   return (
     <main className="min-h-screen bg-slate-50 p-6">
       <section className="mx-auto max-w-7xl">
@@ -7,7 +11,7 @@ export default function Home() {
         </h1>
 
         <p className="mt-2 text-slate-600">
-          Search and select a pickup point on the map.
+          Loaded pickup points: {pickupPoints.length}
         </p>
       </section>
     </main>

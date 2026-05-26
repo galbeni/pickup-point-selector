@@ -1,0 +1,7 @@
+export const ENV = {
+  GRAPHQL_ENDPOINT: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
+  SESSION_ID: process.env.NEXT_PUBLIC_SESSION_ID!,
+  DEFAULT_PAGE_SIZE: Number(
+    process.env.NEXT_PUBLIC_DEFAULT_PAGE_SIZE ?? 100,
+  ),
+};
