@@ -4,6 +4,8 @@ import { usePickupPoints } from "@/hooks/use-pickup-points.hook";
 import { PickupPointInfoPanel } from "@/components/pickup-point/pickup-point-info-panel";
 import { LocationSearch } from "@/components/search/location-search";
 import { SelectedPickupPointSummary } from "@/components/pickup-point/selected-pickup-point-summary";
+import { PickupPointSelectorSkeleton } from "@/components/skeleton/pickup-point-selector-skeleton";
+import { MapLoadingState } from "@/components/map/map-loading-state";
 
 const PickupPointMap = dynamic(
   () =>
@@ -12,9 +14,7 @@ const PickupPointMap = dynamic(
     ),
   {
     ssr: false,
-    loading: () => (
-      <div className="h-160 animate-pulse rounded-2xl bg-slate-200" />
-    ),
+    loading: () => <MapLoadingState />,
   },
 );
 
@@ -22,9 +22,7 @@ export const PickupPointSelector = () => {
   const { data, isLoading, isError, refetch } = usePickupPoints();
 
   if (isLoading) {
-    return (
-      <div className="mt-6 h-160 animate-pulse rounded-2xl bg-slate-200" />
-    );
+    return <PickupPointSelectorSkeleton />;
   }
 
   if (isError) {
@@ -47,10 +45,12 @@ export const PickupPointSelector = () => {
   return (
     <div className="mt-6 space-y-6">
       <LocationSearch />
-      <SelectedPickupPointSummary />
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
         <PickupPointMap pickupPoints={data ?? []} />
-        <PickupPointInfoPanel />
+        <div className="space-y-4">
+          <SelectedPickupPointSummary />
+          <PickupPointInfoPanel />
+        </div>
       </div>
     </div>
   );

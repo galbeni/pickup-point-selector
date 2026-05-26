@@ -20,7 +20,7 @@ const searchTargetIcon = L.divIcon({
 });
 
 const getMarkerPosition = (point: PickupPoint): [number, number] => {
-  return [point.location.longitude, point.location.latitude];
+  return [point.location.latitude, point.location.longitude];
 };
 
 const formatAddress = (point: PickupPoint) => {
@@ -103,7 +103,7 @@ export const PickupPointMap = ({ pickupPoints }: PickupPointMapProps) => {
   );
 
   return (
-    <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       <MapContainer
         center={defaultCenter}
         zoom={6}
