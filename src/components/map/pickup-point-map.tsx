@@ -94,12 +94,20 @@ export const PickupPointMap = ({ pickupPoints }: PickupPointMapProps) => {
     [pickupPoints],
   );
 
+  const activePickupPoint = usePickupPointStore(
+    (state) => state.activePickupPoint,
+  );
+
+  const selectedPickupPoint = usePickupPointStore(
+    (state) => state.selectedPickupPoint,
+  );
+
   const setActivePickupPoint = usePickupPointStore(
     (state) => state.setActivePickupPoint,
   );
 
-  const activePickupPoint = usePickupPointStore(
-    (state) => state.activePickupPoint,
+  const setSelectedPickupPoint = usePickupPointStore(
+    (state) => state.setSelectedPickupPoint,
   );
 
   return (
@@ -119,6 +127,7 @@ export const PickupPointMap = ({ pickupPoints }: PickupPointMapProps) => {
         <MarkerClusterGroup chunkedLoading>
           {validPickupPoints.map((point) => {
             const isActive = activePickupPoint?.id === point.id;
+            const isSelected = selectedPickupPoint?.id === point.id;
 
             return (
               <Marker
@@ -126,14 +135,28 @@ export const PickupPointMap = ({ pickupPoints }: PickupPointMapProps) => {
                 position={getMarkerPosition(point)}
                 icon={createMarkerIcon(isActive)}
                 eventHandlers={{
-                  click: () => setActivePickupPoint(point),
+                  click: (event) => {
+                    setActivePickupPoint(point);
+                    event.target.openPopup();
+                  },
+                  popupclose: () => {
+                    setActivePickupPoint(null);
+                  },
                 }}
               >
                 <Popup>
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     <p className="font-semibold">{point.name}</p>
                     <p>{formatAddress(point)}</p>
                     <p>Type: {point.type}</p>
+                    <button
+                      type="button"
+                      disabled={isSelected}
+                      onClick={() => setSelectedPickupPoint(point)}
+                      className="mt-2 w-full rounded-lg bg-slate-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 cursor-pointer disabled:cursor-not-allowed disabled:bg-lime-600"
+                    >
+                      {isSelected ? "Selected" : "Select pickup point"}
+                    </button>
                   </div>
                 </Popup>
               </Marker>
