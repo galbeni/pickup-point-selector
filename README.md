@@ -22,6 +22,15 @@ Interactive pickup point selector built with Next.js, React, TypeScript and Leaf
 - next-intl
 - Docker
 
+## Requirements
+
+- Node.js v24.13.0
+- pnpm v11.1.3
+
+```bash
+nvm use
+```
+
 ## Getting Started
 
 ### Local development
